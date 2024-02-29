@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {SignInScreen} from '../screens';
+import {ForgotPasswordScreen, SignInScreen, SignUpScreen} from '../screens';
 import {useNavigation} from '@react-navigation/native';
 // import auth from '@react-native-firebase/auth';
 
@@ -34,7 +34,8 @@ const Navigation = () => {
     return (
       <Stack.Group>
         <Stack.Screen name="SignIn" component={SignInScreen} />
-        {/* <Stack.Screen name="Signup" component={SignupScreen} /> */}
+        <Stack.Screen name="SignUp" component={SignUpScreen} />
+        <Stack.Screen name="Forgot" component={ForgotPasswordScreen} />
       </Stack.Group>
     );
   };

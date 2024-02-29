@@ -43,7 +43,14 @@ const SignInScreen = ({navigation}) => {
       <Button
         title="Go to Signup"
         onPress={() => {
-          navigation.navigate('Signup');
+          navigation.navigate('SignUp');
+        }}
+      />
+
+      <Button
+        title="Forgot Password"
+        onPress={() => {
+          navigation.navigate('Forgot');
         }}
       />
     </View>
