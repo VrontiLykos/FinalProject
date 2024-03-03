@@ -1,7 +1,12 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Button} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {ForgotPasswordScreen, SignInScreen, SignUpScreen} from '../screens';
+import {
+  DashboardScreen,
+  ForgotPasswordScreen,
+  SignInScreen,
+  SignUpScreen,
+} from '../screens';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import AuthHelper from '../helpers/AuthHelper';
@@ -38,6 +43,8 @@ const Navigation = () => {
           component={SignUpScreen}
           options={{
             headerBackTitleVisible: false,
+            headerTitleStyle: {color: 'black'},
+            headerTintColor: 'orange',
           }}
         />
         <Stack.Screen
@@ -45,6 +52,8 @@ const Navigation = () => {
           component={ForgotPasswordScreen}
           options={{
             headerTitle: 'Forgot My Password',
+            headerTitleStyle: {color: 'black'},
+            headerTintColor: 'orange',
             headerBackTitleVisible: false,
           }}
         />
@@ -53,12 +62,29 @@ const Navigation = () => {
   };
 
   const renderAdminStack = () => {
-    return <Stack.Group></Stack.Group>;
+    return (
+      <Stack.Group>
+        <Stack.Screen
+          name="Dashboard"
+          component={DashboardScreen}
+          options={{
+            headerLeft: () => (
+              <Button
+                onPress={() => {
+                  AuthHelper.signOut();
+                }}
+                title="Logout"
+                color="red"
+              />
+            ),
+          }}></Stack.Screen>
+      </Stack.Group>
+    );
   };
 
   return (
     <Stack.Navigator>
-      {false ? renderAdminStack() : renderAuthStack()}
+      {firebaseUser ? renderAdminStack() : renderAuthStack()}
     </Stack.Navigator>
   );
 };

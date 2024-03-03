@@ -3,19 +3,15 @@ import {
   Text,
   View,
   TextInput,
-  Button,
   TouchableOpacity,
-  Image,
 } from 'react-native';
 import React, {useMemo, useState} from 'react';
 import RadioGroup from 'react-native-radio-buttons-group';
 import AuthHelper from '../../helpers/AuthHelper';
+import {Formik} from 'formik';
+import {signUpValidationSchema} from '../../schemas/SignUpSchema';
 
 const SignUpScreen = () => {
-  const onSignupPressed = async (email, password) => {
-    AuthHelper.signUp(email, password);
-  };
-
   const radioButtons = useMemo(
     () => [
       {
@@ -31,54 +27,83 @@ const SignUpScreen = () => {
     ],
     [],
   );
-
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [id, setID] = useState();
   const [selectedId, setSelectedId] = useState();
 
   return (
     <View style={styles.container}>
-      <View style={styles.textInputView}>
-        <Text>Enter Email</Text>
-        <TextInput
-          name="email"
-          style={styles.textInput}
-          onChangeText={newText => setEmail(newText)}
-          keyboardType="email-address"
-          autoCapitalize="none"
-        />
-        <Text>Enter Password</Text>
-        <TextInput
-          name="password"
-          style={styles.textInput}
-          onChangeText={newText => setPassword(newText)}
-          autoCapitalize="none"
-        />
-        {selectedId == 2 && (
-          <View>
-            <Text>Enter Employee ID</Text>
-            <TextInput
-              name="ID"
-              style={styles.textInput}
-              onChangeText={newText => setID(newText)}
-              autoCapitalize="none"
-            />
-          </View>
+      <Formik
+        initialValues={{email: '', password: '' /*, employeeID: ''*/}}
+        validationSchema={signUpValidationSchema}
+        onSubmit={values => AuthHelper.signUp(values.email, values.password)}>
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          values,
+          errors,
+          isValid,
+        }) => (
+          <>
+            <View style={styles.textInputView}>
+              <Text style={styles.textInputTitle}>Enter Email</Text>
+              <TextInput
+                onChangeText={handleChange('email')}
+                onBlur={handleBlur('email')}
+                value={values.email}
+                keyboardType="email-address"
+                style={styles.textInput}
+                autoCapitalize="none"
+              />
+              {errors.email && (
+                <Text style={styles.errorText}>{errors.email}</Text>
+              )}
+              <Text style={styles.textInputTitle}>Enter Password</Text>
+              <TextInput
+                onChangeText={handleChange('password')}
+                onBlur={handleBlur('password')}
+                value={values.password}
+                secureTextEntry
+                style={styles.textInput}
+                autoCapitalize="none"
+              />
+              {errors.password && (
+                <Text style={styles.errorText}>{errors.password}</Text>
+              )}
+              {/* {selectedId == 2 && (
+                <View>
+                  <Text style={styles.textInputTitle}>Enter Employee ID</Text>
+                  <TextInput
+                    onChangeText={handleChange('employeeID')}
+                    onBlur={handleBlur('employeeID')}
+                    value={values.employeeID}
+                    secureTextEntry
+                    style={styles.textInput}
+                    autoCapitalize="none"
+                  />
+                  {errors.employeeID && (
+                    <Text style={styles.errorText}>{errors.employeeID}</Text>
+                  )}
+                </View>
+              )} */}
+            </View>
+            <TouchableOpacity
+              style={styles.buttonLogin}
+              disabled={!isValid}
+              onPress={() => {
+                handleSubmit;
+              }}>
+              <Text>Signup</Text>
+            </TouchableOpacity>
+            <View style={styles.radioButtonStyles}>
+              <RadioGroup
+                radioButtons={radioButtons}
+                onPress={setSelectedId}
+                selectedId={selectedId}
+              />
+            </View>
+          </>
         )}
-      </View>
-      <TouchableOpacity
-        style={styles.buttonLogin}
-        onPress={() => {
-          onSignupPressed(email, password);
-        }}>
-        <Text>Signup</Text>
-      </TouchableOpacity>
-      <RadioGroup
-        radioButtons={radioButtons}
-        onPress={setSelectedId}
-        selectedId={selectedId}
-      />
+      </Formik>
     </View>
   );
 };
@@ -92,10 +117,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  textInputTitle: {
+    marginTop: 10,
+  },
   textInputView: {
     padding: 15,
     justifyContent: 'space-evenly',
     width: '100%',
+  },
+  errorText: {
+    fontSize: 10,
+    color: 'red',
+    marginVertical: 5,
   },
   textInput: {
     backgroundColor: 'white',
@@ -113,5 +146,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 40,
     marginBottom: 10,
+  },
+  radioButtonStyles: {
+    flexDirection: 'row',
   },
 });

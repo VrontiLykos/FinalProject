@@ -9,57 +9,79 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import AuthHelper from '../../helpers/AuthHelper';
+import {Formik} from 'formik';
+import {loginValidationSchema} from '../../schemas/LoginSchema';
 
 const SignInScreen = ({navigation}) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
   return (
     <View style={styles.container}>
-      <Image
-        style={styles.appImage}
-        source={require('../../assets/cartIcon.png')}
-      />
-      <View style={styles.textInputView}>
-        <Text>Enter Email</Text>
-        <TextInput
-          value={email}
-          onChangeText={ct => {
-            setEmail(ct);
-          }}
-          style={styles.textInput}
-          autoCapitalize="none"
-        />
-        <Text>Enter Password</Text>
-        <TextInput
-          value={password}
-          onChangeText={ct => {
-            setPassword(ct);
-          }}
-          style={styles.textInput}
-          autoCapitalize="none"
-        />
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('Forgot');
-          }}>
-          <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
-        </TouchableOpacity>
-      </View>
-      <TouchableOpacity
-        style={styles.buttonLogin}
-        onPress={() => {
-          AuthHelper.signIn(email, password);
-        }}>
-        <Text>Login</Text>
-      </TouchableOpacity>
+      <Formik
+        initialValues={{email: '', password: ''}}
+        validationSchema={loginValidationSchema}
+        onSubmit={values => AuthHelper.signIn(values.email, values.password)}>
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          values,
+          errors,
+          isValid,
+        }) => (
+          <>
+            <Image
+              style={styles.appImage}
+              source={require('../../assets/cartIcon.png')}
+            />
+            <View style={styles.textInputView}>
+              <Text style={styles.textInputTitle}>Enter Email</Text>
+              <TextInput
+                onChangeText={handleChange('email')}
+                onBlur={handleBlur('email')}
+                value={values.email}
+                keyboardType="email-address"
+                style={styles.textInput}
+                autoCapitalize="none"
+              />
+              {errors.email && (
+                <Text style={styles.errorText}>{errors.email}</Text>
+              )}
+              <Text style={styles.textInputTitle}>Enter Password</Text>
+              <TextInput
+                onChangeText={handleChange('password')}
+                onBlur={handleBlur('password')}
+                value={values.password}
+                secureTextEntry
+                style={styles.textInput}
+                autoCapitalize="none"
+              />
+              {errors.password && (
+                <Text style={styles.errorText}>{errors.password}</Text>
+              )}
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('Forgot');
+                }}>
+                <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity
+              style={styles.buttonLogin}
+              disabled={!isValid}
+              onPress={() => {
+                handleSubmit;
+              }}>
+              <Text>Login</Text>
+            </TouchableOpacity>
 
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate('SignUp');
-        }}>
-        <Text>Don't have an account?</Text>
-      </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('SignUp');
+              }}>
+              <Text style={styles.signUpText}>Don't have an account?</Text>
+            </TouchableOpacity>
+          </>
+        )}
+      </Formik>
     </View>
   );
 };
@@ -74,8 +96,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   appImage: {
-    flex: 0.7,
+    flex: 0.8,
     resizeMode: 'center',
+  },
+  textInputTitle: {
+    marginTop: 10,
   },
   textInputView: {
     padding: 15,
@@ -87,6 +112,11 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 5,
     borderWidth: 1,
+    padding: 5,
+  },
+  errorText: {
+    fontSize: 10,
+    color: 'red',
     marginVertical: 5,
   },
   buttonLogin: {
@@ -100,7 +130,11 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   forgotPasswordText: {
+    marginTop: 5,
     fontSize: 10,
+    color: 'blue',
+  },
+  signUpText: {
     color: 'blue',
   },
 });

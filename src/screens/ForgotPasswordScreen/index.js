@@ -3,33 +3,54 @@ import {
   Text,
   View,
   TextInput,
-  Button,
   TouchableOpacity,
-  Image,
 } from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
+import {Formik} from 'formik';
+import {forgotPasswordSchema} from '../../schemas/ForgotPasswordSchema';
 
 const ForgotPasswordScreen = () => {
-  const [email, setEmail] = useState('');
-
   return (
     <View style={styles.container}>
-      <View style={styles.textInputView}>
-        <Text>Enter Email</Text>
-        <TextInput
-          value={email}
-          style={styles.textInput}
-          onChangeText={ct => setEmail(ct)}
-          autoCapitalize="none"
-        />
-      </View>
-      <TouchableOpacity
-        style={styles.buttonLogin}
-        onPress={() => {
-          //   onSignupPressed(email, password);
-        }}>
-        <Text>Submit</Text>
-      </TouchableOpacity>
+      <Formik
+        initialValues={{email: ''}}
+        validationSchema={forgotPasswordSchema}
+        onSubmit={values => console.log(values)}>
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          values,
+          errors,
+          isValid,
+        }) => (
+          <>
+            <View style={styles.textInputView}>
+              <Text style={styles.textInputTitle}>Enter Email</Text>
+              <TextInput
+                onChangeText={handleChange('email')}
+                onBlur={handleBlur('email')}
+                value={values.email}
+                keyboardType="email-address"
+                style={styles.textInput}
+                autoCapitalize="none"
+              />
+              {errors.email && (
+                <Text style={styles.errorText}>{errors.email}</Text>
+              )}
+            </View>
+
+            <TouchableOpacity
+              style={styles.buttonLogin}
+              disabled={!isValid}
+              onPress={() => {
+                handleSubmit;
+              }}>
+              <Text>Submit</Text>
+            </TouchableOpacity>
+          </>
+        )}
+      </Formik>
     </View>
   );
 };
@@ -43,6 +64,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  textInputTitle: {
+    marginTop: 10,
+  },
   textInputView: {
     padding: 15,
     justifyContent: 'space-evenly',
@@ -53,6 +77,11 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 5,
     borderWidth: 1,
+    padding: 5,
+  },
+  errorText: {
+    fontSize: 10,
+    color: 'red',
     marginVertical: 5,
   },
   buttonLogin: {
