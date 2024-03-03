@@ -13,46 +13,47 @@ const SignInScreen = ({navigation}) => {
   const [password, setPassword] = useState('');
 
   return (
-    <View>
-      <TextInput
-        value={email}
-        onChangeText={ct => {
-          setEmail(ct);
-        }}
-        placeholder="Enter Email"
-        style={styles.textInput}
-        autoCapitalize="none"
-      />
-      <TextInput
-        value={password}
-        onChangeText={ct => {
-          setPassword(ct);
-        }}
-        placeholder="Enter Password"
-        style={styles.textInput}
-        autoCapitalize="none"
-      />
-
+    <View style={styles.container}>
+      <View style={styles.textInputView}>
+        <Text>Enter Email</Text>
+        <TextInput
+          value={email}
+          onChangeText={ct => {
+            setEmail(ct);
+          }}
+          style={styles.textInput}
+          autoCapitalize="none"
+        />
+        <Text>Enter Password</Text>
+        <TextInput
+          value={password}
+          onChangeText={ct => {
+            setPassword(ct);
+          }}
+          style={styles.textInput}
+          autoCapitalize="none"
+        />
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('Forgot');
+          }}>
+          <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
+        </TouchableOpacity>
+      </View>
       <TouchableOpacity
+        style={styles.buttonLogin}
         onPress={() => {
           //   onLoginPressed();
         }}>
         <Text>Login</Text>
       </TouchableOpacity>
 
-      <Button
-        title="Go to Signup"
+      <TouchableOpacity
         onPress={() => {
           navigation.navigate('SignUp');
-        }}
-      />
-
-      <Button
-        title="Forgot Password"
-        onPress={() => {
-          navigation.navigate('Forgot');
-        }}
-      />
+        }}>
+        <Text>Don't have an account?</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -60,9 +61,36 @@ const SignInScreen = ({navigation}) => {
 export default SignInScreen;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textInputView: {
+    padding: 15,
+    justifyContent: 'space-evenly',
+    width: '100%',
+  },
   textInput: {
-    backgroundColor: 'pink',
+    backgroundColor: 'white',
     height: 40,
-    margin: 5,
+    borderRadius: 5,
+    borderWidth: 1,
+    marginVertical: 5,
+  },
+  buttonLogin: {
+    width: '80%',
+    backgroundColor: 'orange',
+    borderRadius: 25,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 40,
+    marginBottom: 10,
+  },
+  forgotPasswordText: {
+    fontSize: 10,
+    color: 'blue',
   },
 });

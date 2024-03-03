@@ -33,7 +33,11 @@ const Navigation = () => {
   const renderAuthStack = () => {
     return (
       <Stack.Group>
-        <Stack.Screen name="SignIn" component={SignInScreen} />
+        <Stack.Screen
+          name="SignIn"
+          component={SignInScreen}
+          options={{headerShown: false}}
+        />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="Forgot" component={ForgotPasswordScreen} />
       </Stack.Group>

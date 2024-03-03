@@ -25,7 +25,7 @@ export default ForgotPasswordScreen;
 
 const styles = StyleSheet.create({
   textInput: {
-    backgroundColor: 'pink',
+    backgroundColor: 'lightgrey',
     height: 40,
     margin: 5,
     padding: 5,

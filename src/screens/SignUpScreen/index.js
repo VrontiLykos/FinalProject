@@ -31,8 +31,8 @@ const SignUpScreen = () => {
       },
       {
         id: '2',
-        label: '  Admin  ',
-        value: '  admin  ',
+        label: 'Devilery',
+        value: 'Delivery',
       },
     ],
     [],
