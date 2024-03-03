@@ -5,8 +5,10 @@ import {
   TextInput,
   TouchableOpacity,
   Button,
+  Image,
 } from 'react-native';
 import React, {useState} from 'react';
+import AuthHelper from '../../helpers/AuthHelper';
 
 const SignInScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -14,6 +16,10 @@ const SignInScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <Image
+        style={styles.appImage}
+        source={require('../../assets/cartIcon.png')}
+      />
       <View style={styles.textInputView}>
         <Text>Enter Email</Text>
         <TextInput
@@ -43,7 +49,7 @@ const SignInScreen = ({navigation}) => {
       <TouchableOpacity
         style={styles.buttonLogin}
         onPress={() => {
-          //   onLoginPressed();
+          AuthHelper.signIn(email, password);
         }}>
         <Text>Login</Text>
       </TouchableOpacity>
@@ -66,6 +72,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  appImage: {
+    flex: 0.7,
+    resizeMode: 'center',
   },
   textInputView: {
     padding: 15,

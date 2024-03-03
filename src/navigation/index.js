@@ -3,8 +3,8 @@ import React, {useState, useEffect} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {ForgotPasswordScreen, SignInScreen, SignUpScreen} from '../screens';
 import {useNavigation} from '@react-navigation/native';
-import auth from '@react-native-firebase/auth';
 import {useDispatch, useSelector} from 'react-redux';
+import AuthHelper from '../helpers/AuthHelper';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,18 +15,11 @@ const Navigation = () => {
   const [firebaseUser, setFirebaseUser] = useState(null);
 
   function onAuthStateChanged(user) {
-    console.log(user);
     setFirebaseUser(user);
   }
 
-  const onFirebaseSignedOut = () => {
-    auth()
-      .signOut()
-      .then(() => console.log('User signed out!'));
-  };
-
   useEffect(() => {
-    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    const subscriber = AuthHelper.onAuthStateChanged(onAuthStateChanged);
     return subscriber;
   }, []);
 
@@ -36,10 +29,25 @@ const Navigation = () => {
         <Stack.Screen
           name="SignIn"
           component={SignInScreen}
-          options={{headerShown: false}}
+          options={{
+            headerShown: false,
+          }}
         />
-        <Stack.Screen name="SignUp" component={SignUpScreen} />
-        <Stack.Screen name="Forgot" component={ForgotPasswordScreen} />
+        <Stack.Screen
+          name="SignUp"
+          component={SignUpScreen}
+          options={{
+            headerBackTitleVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="Forgot"
+          component={ForgotPasswordScreen}
+          options={{
+            headerTitle: 'Forgot My Password',
+            headerBackTitleVisible: false,
+          }}
+        />
       </Stack.Group>
     );
   };
