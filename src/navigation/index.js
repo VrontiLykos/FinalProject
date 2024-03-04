@@ -10,6 +10,7 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import AuthHelper from '../helpers/AuthHelper';
+import {appOrange} from '../constants';
 
 const Stack = createNativeStackNavigator();
 
@@ -44,7 +45,7 @@ const Navigation = () => {
           options={{
             headerBackTitleVisible: false,
             headerTitleStyle: {color: 'black'},
-            headerTintColor: '#ff9a00',
+            headerTintColor: appOrange,
           }}
         />
         <Stack.Screen
@@ -53,7 +54,7 @@ const Navigation = () => {
           options={{
             headerTitle: 'Forgot My Password',
             headerTitleStyle: {color: 'black'},
-            headerTintColor: '#ff9a00',
+            headerTintColor: appOrange,
             headerBackTitleVisible: false,
           }}
         />

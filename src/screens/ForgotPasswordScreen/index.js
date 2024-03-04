@@ -8,6 +8,7 @@ import {
 import React from 'react';
 import {Formik} from 'formik';
 import {forgotPasswordSchema} from '../../schemas/ForgotPasswordSchema';
+import {appOrange} from '../../constants';
 
 const ForgotPasswordScreen = () => {
   return (
@@ -86,7 +87,7 @@ const styles = StyleSheet.create({
   },
   buttonLogin: {
     width: '80%',
-    backgroundColor: '#ff9a00',
+    backgroundColor: appOrange,
     borderRadius: 25,
     height: 50,
     alignItems: 'center',

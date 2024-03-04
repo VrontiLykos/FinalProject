@@ -11,6 +11,7 @@ import RadioGroup from 'react-native-radio-buttons-group';
 import AuthHelper from '../../helpers/AuthHelper';
 import {Formik} from 'formik';
 import {signUpValidationSchema} from '../../schemas/SignUpSchema';
+import {appOrange} from '../../constants';
 
 const SignUpScreen = () => {
   const radioButtons = useMemo(
@@ -138,7 +139,7 @@ const styles = StyleSheet.create({
   },
   buttonLogin: {
     width: '80%',
-    backgroundColor: '#ff9a00',
+    backgroundColor: appOrange,
     borderRadius: 25,
     height: 50,
     alignItems: 'center',

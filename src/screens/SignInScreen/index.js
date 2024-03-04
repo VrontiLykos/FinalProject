@@ -11,6 +11,7 @@ import React, {useState} from 'react';
 import AuthHelper from '../../helpers/AuthHelper';
 import {Formik} from 'formik';
 import {loginValidationSchema} from '../../schemas/LoginSchema';
+import {appOrange} from '../../constants';
 
 const SignInScreen = ({navigation}) => {
   return (
@@ -119,7 +120,7 @@ const styles = StyleSheet.create({
   },
   buttonLogin: {
     width: '80%',
-    backgroundColor: '#ff9a00',
+    backgroundColor: appOrange,
     borderRadius: 25,
     height: 50,
     alignItems: 'center',
@@ -130,9 +131,9 @@ const styles = StyleSheet.create({
   forgotPasswordText: {
     marginTop: 5,
     fontSize: 10,
-    color: '#ff9a00',
+    color: appOrange,
   },
   signUpText: {
-    color: '#ff9a00',
+    color: appOrange,
   },
 });

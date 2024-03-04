@@ -1,7 +1,8 @@
 import {StyleSheet, Image} from 'react-native';
 import React, {useState} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {ProfileScreen, StoreScreen} from '../index';
+import {MapScreen, ProfileScreen, StoreScreen} from '../index';
+import {appOrange} from '../../constants';
 
 const Tab = createBottomTabNavigator();
 
@@ -10,8 +11,8 @@ const DashboardScreen = () => {
     <Tab.Navigator
       screenOptions={() => ({
         tabBarActiveTintColor: 'white',
-        tabBarInactiveTintColor: '#ff9a00',
-        tabBarActiveBackgroundColor: '#ff9a00',
+        tabBarInactiveTintColor: appOrange,
+        tabBarActiveBackgroundColor: appOrange,
       })}>
       <Tab.Screen
         name="Store"
@@ -29,7 +30,7 @@ const DashboardScreen = () => {
       />
       <Tab.Screen
         name="Map"
-        component={StoreScreen}
+        component={MapScreen}
         options={{
           tabBarIcon: ({focused}) => {
             let iconName;
@@ -86,7 +87,7 @@ const styles = StyleSheet.create({
   },
   buttonLogin: {
     width: '80%',
-    backgroundColor: '#ff9a00',
+    backgroundColor: appOrange,
     borderRadius: 25,
     height: 50,
     alignItems: 'center',

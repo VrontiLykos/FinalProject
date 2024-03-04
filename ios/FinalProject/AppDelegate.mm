@@ -1,5 +1,6 @@
 #import "AppDelegate.h"
 #import <Firebase.h>
+#import <GoogleMaps/GoogleMaps.h>
 #import <React/RCTBundleURLProvider.h>
 
 @implementation AppDelegate
@@ -7,6 +8,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   [FIRApp configure];
+  [GMSServices provideAPIKey:@"AIzaSyC1r7KI3gcl6sYa9s-Pq9UoDXqlKk952fg"];
   self.moduleName = @"FinalProject";
   // You can add your custom initial props in the dictionary below.
   // They will be passed down to the ViewController used by React Native.
