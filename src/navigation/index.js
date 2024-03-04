@@ -44,7 +44,7 @@ const Navigation = () => {
           options={{
             headerBackTitleVisible: false,
             headerTitleStyle: {color: 'black'},
-            headerTintColor: 'orange',
+            headerTintColor: '#ff9a00',
           }}
         />
         <Stack.Screen
@@ -53,7 +53,7 @@ const Navigation = () => {
           options={{
             headerTitle: 'Forgot My Password',
             headerTitleStyle: {color: 'black'},
-            headerTintColor: 'orange',
+            headerTintColor: '#ff9a00',
             headerBackTitleVisible: false,
           }}
         />

@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
   },
   buttonLogin: {
     width: '80%',
-    backgroundColor: 'orange',
+    backgroundColor: '#ff9a00',
     borderRadius: 25,
     height: 50,
     alignItems: 'center',
@@ -130,9 +130,9 @@ const styles = StyleSheet.create({
   forgotPasswordText: {
     marginTop: 5,
     fontSize: 10,
-    color: 'orange',
+    color: '#ff9a00',
   },
   signUpText: {
-    color: 'orange',
+    color: '#ff9a00',
   },
 });

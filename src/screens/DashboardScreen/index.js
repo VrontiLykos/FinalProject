@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Image} from 'react-native';
 import React, {useState} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {ProfileScreen, StoreScreen} from '../index';
@@ -7,16 +7,53 @@ const Tab = createBottomTabNavigator();
 
 const DashboardScreen = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={() => ({
+        tabBarActiveTintColor: 'white',
+        tabBarInactiveTintColor: '#ff9a00',
+        tabBarActiveBackgroundColor: '#ff9a00',
+      })}>
       <Tab.Screen
         name="Store"
         component={StoreScreen}
-        options={{headerShown: false}}
+        options={{
+          tabBarIcon: ({focused}) => {
+            let iconName;
+            iconName = focused
+              ? require('../../assets/selectedStoreIcon.png')
+              : require('../../assets/storeIcon.png');
+            return <Image style={styles.appImage} source={iconName} />;
+          },
+          headerShown: false,
+        }}
+      />
+      <Tab.Screen
+        name="Map"
+        component={StoreScreen}
+        options={{
+          tabBarIcon: ({focused}) => {
+            let iconName;
+            iconName = focused
+              ? require('../../assets/selectedMapIcon.png')
+              : require('../../assets/mapIcon.png');
+            return <Image style={styles.appImage} source={iconName} />;
+          },
+          headerShown: false,
+        }}
       />
       <Tab.Screen
         name="Profile"
         component={ProfileScreen}
-        options={{headerShown: false}}
+        options={{
+          tabBarIcon: ({focused}) => {
+            let iconName;
+            iconName = focused
+              ? require('../../assets/selectedProfileIcon.png')
+              : require('../../assets/profileIcon.png');
+            return <Image style={styles.appImage} source={iconName} />;
+          },
+          headerShown: false,
+        }}
       />
     </Tab.Navigator>
   );
@@ -30,6 +67,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  appImage: {
+    flex: 0.8,
+    resizeMode: 'center',
   },
   textInputView: {
     padding: 15,
@@ -45,7 +86,7 @@ const styles = StyleSheet.create({
   },
   buttonLogin: {
     width: '80%',
-    backgroundColor: 'orange',
+    backgroundColor: '#ff9a00',
     borderRadius: 25,
     height: 50,
     alignItems: 'center',
