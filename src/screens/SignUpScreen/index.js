@@ -4,6 +4,7 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import React, {useMemo, useState} from 'react';
 import RadioGroup from 'react-native-radio-buttons-group';
@@ -89,9 +90,7 @@ const SignUpScreen = () => {
             <TouchableOpacity
               style={styles.buttonLogin}
               disabled={!isValid}
-              onPress={() => {
-                handleSubmit;
-              }}>
+              onPress={handleSubmit}>
               <Text>Signup</Text>
             </TouchableOpacity>
             <View style={styles.radioButtonStyles}>

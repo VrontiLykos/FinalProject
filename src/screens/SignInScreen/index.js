@@ -67,9 +67,7 @@ const SignInScreen = ({navigation}) => {
             <TouchableOpacity
               style={styles.buttonLogin}
               disabled={!isValid}
-              onPress={() => {
-                handleSubmit;
-              }}>
+              onPress={handleSubmit}>
               <Text>Login</Text>
             </TouchableOpacity>
 
@@ -132,9 +130,9 @@ const styles = StyleSheet.create({
   forgotPasswordText: {
     marginTop: 5,
     fontSize: 10,
-    color: 'blue',
+    color: 'orange',
   },
   signUpText: {
-    color: 'blue',
+    color: 'orange',
   },
 });
