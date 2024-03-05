@@ -10,12 +10,48 @@ import React from 'react';
 import {appOrange} from '../../constants';
 
 const itemList = [
-  {id: 1, name: 'Macbook', details: 'a macbook laptop', price: 2500},
-  {id: 2, name: 'iPhone', details: 'an iphone phone', price: 1500},
-  {id: 3, name: 'iPad', details: 'an ipad pad', price: 800},
-  {id: 4, name: 'Tripod', details: 'a tri pod', price: 50},
-  {id: 5, name: 'Newtonion Telescope', details: 'a tele scope', price: 500},
-  {id: 6, name: 'LED Monitor', details: 'an LED monitor', price: 200},
+  {
+    id: 1,
+    name: 'Macbook',
+    details: 'a macbook laptop',
+    price: 2500,
+    image: require('../../assets/cartIcon.png'),
+  },
+  {
+    id: 2,
+    name: 'iPhone',
+    details: 'an iphone phone',
+    price: 1500,
+    image: require('../../assets/cartIcon.png'),
+  },
+  {
+    id: 3,
+    name: 'iPad',
+    details: 'an ipad pad',
+    price: 800,
+    image: require('../../assets/cartIcon.png'),
+  },
+  {
+    id: 4,
+    name: 'Tripod',
+    details: 'a tri pod',
+    price: 50,
+    image: require('../../assets/cartIcon.png'),
+  },
+  {
+    id: 5,
+    name: 'Newtonion Telescope',
+    details: 'a tele scope',
+    price: 500,
+    image: require('../../assets/cartIcon.png'),
+  },
+  {
+    id: 6,
+    name: 'LED Monitor',
+    details: 'an LED monitor',
+    price: 200,
+    image: require('../../assets/cartIcon.png'),
+  },
 ];
 
 const StoreScreen = ({navigation}) => {
@@ -33,15 +69,11 @@ const StoreScreen = ({navigation}) => {
               }}
               style={styles.itemTableCell}>
               <View>
-                <Image
-                  style={styles.appImage}
-                  source={require('../../assets/cartIcon.png')}
-                />
+                <Image style={styles.appImage} source={item.image} />
               </View>
               <View style={styles.itemDetailsView}>
                 <Text style={{fontWeight: 'bold'}}>{item.name}</Text>
-                <Text>{item.details}</Text>
-                <Text>{item.price}</Text>
+                <Text>${item.price}</Text>
               </View>
             </TouchableOpacity>
           );
@@ -58,21 +90,27 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   itemTableCell: {
-    backgroundColor: appOrange,
-    opacity: 0.5,
     margin: 5,
     justifyContent: 'space-around',
     flexDirection: 'row',
-    paddingHorizontal: 10,
-    borderRadius: 5,
+    borderWidth: 2,
+    borderColor: 'black',
+    borderRadius: 15,
+    backgroundColor: appOrange,
   },
   itemDetailsView: {
+    paddingHorizontal: 10,
+    borderRadius: 5,
     flexDirection: 'column',
+    alignItems: 'center',
     justifyContent: 'space-around',
+    width: '40%',
   },
-  itemImageView: {},
   appImage: {
     height: 100,
     width: 100,
+    borderWidth: 1,
+    borderColor: 'black',
+    borderRadius: 50,
   },
 });

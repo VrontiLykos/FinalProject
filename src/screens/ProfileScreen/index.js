@@ -52,24 +52,20 @@ const ProfileScreen = () => {
       </ImageBackground>
       <View style={styles.profileInputView}>
         <View style={styles.profileItemView}>
-          <TextInput
-            placeholder="Joe mama"
-            style={styles.profileTextInput}></TextInput>
+          <Text style={styles.profileItemText}>First Name</Text>
+          <TextInput style={styles.profileTextInput}></TextInput>
         </View>
         <View style={styles.profileItemView}>
-          <TextInput
-            placeholder="Joe mama"
-            style={styles.profileTextInput}></TextInput>
+          <Text style={styles.profileItemText}>Last Name</Text>
+          <TextInput style={styles.profileTextInput}></TextInput>
         </View>
         <View style={styles.profileItemView}>
-          <TextInput
-            placeholder="Joe mama"
-            style={styles.profileTextInput}></TextInput>
+          <Text style={styles.profileItemText}>Age</Text>
+          <TextInput style={styles.profileTextInput}></TextInput>
         </View>
         <View style={styles.profileItemView}>
-          <TextInput
-            placeholder="Joe mama"
-            style={styles.profileTextInput}></TextInput>
+          <Text style={styles.profileItemText}>Address</Text>
+          <TextInput style={styles.profileTextInput}></TextInput>
         </View>
       </View>
     </View>
@@ -102,15 +98,20 @@ const styles = StyleSheet.create({
     height: 150,
     width: 150,
     borderRadius: 75,
-    backgroundColor: 'purple',
+  },
+  profileItemText: {
+    paddingBottom: 3,
+    paddingLeft: 10,
   },
   profileItemView: {
-    flexDirection: 'row',
+    flexDirection: 'column',
+    width: '100%',
+    padding: 15,
   },
   profileTextInput: {
     backgroundColor: appOrange,
     opacity: 0.5,
-    width: '80%',
+    width: '100%',
     marginRight: 10,
     padding: 15,
     borderRadius: 15,
