@@ -6,7 +6,7 @@ import {appOrange} from '../../constants';
 
 const Tab = createBottomTabNavigator();
 
-const DashboardScreen = () => {
+const DashboardScreen = ({navigation}) => {
   return (
     <Tab.Navigator
       screenOptions={() => ({

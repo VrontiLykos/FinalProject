@@ -5,6 +5,7 @@ import DashboardScreen from './DashboardScreen';
 import ProfileScreen from './ProfileScreen';
 import StoreScreen from './StoreScreen';
 import MapScreen from './MapScreen';
+import ShopDetailsScreen from './ShopDetailsScreen';
 
 export {SignInScreen};
 export {SignUpScreen};
@@ -13,3 +14,4 @@ export {DashboardScreen};
 export {ProfileScreen};
 export {StoreScreen};
 export {MapScreen};
+export {ShopDetailsScreen};

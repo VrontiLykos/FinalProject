@@ -1,9 +1,10 @@
-import {StyleSheet, Button} from 'react-native';
+import {StyleSheet, Button, Image} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {
   DashboardScreen,
   ForgotPasswordScreen,
+  ShopDetailsScreen,
   SignInScreen,
   SignUpScreen,
 } from '../screens';
@@ -66,10 +67,10 @@ const Navigation = () => {
     return (
       <Stack.Group>
         <Stack.Screen
-          name="Dashboard"
+          name="Shop App"
           component={DashboardScreen}
           options={{
-            headerLeft: () => (
+            headerRight: () => (
               <Button
                 onPress={() => {
                   AuthHelper.signOut();
@@ -78,7 +79,9 @@ const Navigation = () => {
                 color="red"
               />
             ),
-          }}></Stack.Screen>
+          }}
+        />
+        <Stack.Screen name="Shop Details" component={ShopDetailsScreen} />
       </Stack.Group>
     );
   };

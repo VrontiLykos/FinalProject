@@ -1,4 +1,11 @@
-import {StyleSheet, Text, View, FlatList, Image} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import React from 'react';
 import {appOrange} from '../../constants';
 
@@ -11,14 +18,20 @@ const itemList = [
   {id: 6, name: 'LED Monitor', details: 'an LED monitor', price: 200},
 ];
 
-const StoreScreen = () => {
+const StoreScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <FlatList
         data={itemList}
         renderItem={({item, index}) => {
           return (
-            <View style={styles.itemTableCell}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('Shop Details', {
+                  item: item,
+                });
+              }}
+              style={styles.itemTableCell}>
               <View>
                 <Image
                   style={styles.appImage}
@@ -30,7 +43,7 @@ const StoreScreen = () => {
                 <Text>{item.details}</Text>
                 <Text>{item.price}</Text>
               </View>
-            </View>
+            </TouchableOpacity>
           );
         }}
       />
